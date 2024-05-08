@@ -3,10 +3,22 @@
 ## Overview
 This repository contains a CPU scheduling simulation project implemented in C++. The project aims to compare the performance of two CPU scheduling algorithms: Shortest Job First (SJF) and Shortest Remaining Time Next (SRTN). The simulator executes a set of processes with CPU requirements and collects various statistics to evaluate the efficiency of each algorithm.
 
-## Usage
-1. Clone the repository to your local machine.
-2. Compile the source code using a C++ compiler.
-3. Prepare input files with process details (refer to input format).
-4. Run the simulator executable with the appropriate input file.
-5. View the output files for simulation results.
+## Features
 
+- **FCFS Algorithm**: Simulates the FCFS scheduling algorithm.
+- **Round Robin Algorithm**: Simulates the Round Robin scheduling algorithm with a specified time quantum.
+- **Performance Metrics**: Calculates and displays average turnaround time, waiting time, response time, and CPU efficiency.
+- **Input**: Processes are read from an input file (`input.txt`) with each line containing process ID, arrival time, and burst time.
+- **Output**: Provides detailed results for each process and overall performance metrics.
+- 
+## Getting Started
+
+1. **Clone the Repository**: Clone this repository to your local machine.
+
+   ```bash
+   git clone https://github.com/your-username/cpu-scheduling-simulation.git
+
+2. **Navigate to Project Directory**: Move into the project directory.
+
+   ```bash
+   cd cpu-scheduling-simulation
