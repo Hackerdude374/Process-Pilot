@@ -33,5 +33,6 @@ This project contains a CPU scheduling simulation project implemented in C++. Th
    ./main
    ```
 
-4. Pick yo
+4. Pick your Scheduling Algorithm and Number of Processes.
+![alt text](image.png)
 
