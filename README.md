@@ -16,9 +16,17 @@ This repository contains a CPU scheduling simulation project implemented in C++.
 1. **Clone the Repository**: Clone this repository to your local machine.
 
    ```bash
-   git clone https://github.com/your-username/cpu-scheduling-simulation.git
+   git clone https://github.com/Hackerdude374/ProcessPilot.git
 
 2. **Navigate to Project Directory**: Move into the project directory.
 
    ```bash
-   cd cpu-scheduling-simulation
+   cd ProcessPilot
+
+3. **Compile the Code /Run the Simulator**: Compile the C++ code using a C++ compiler. For example, using g++:
+
+   ```bash
+   g++ -o main main.cpp
+
+
+
