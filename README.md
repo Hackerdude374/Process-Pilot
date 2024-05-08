@@ -18,8 +18,70 @@ The Round Robin (RR) scheduling algorithm is implemented in the roundRobin funct
 Here's how the roundRobin function was implemented:
    ```cpp
    void roundRobin(vector<Process>& processes, int quantum) {
-    // Implementation code here...
+    queue<int> readyQueue; // Queue to store the indexes of ready processes
+    int currentTime = 0;   // Current time in the simulation
+    int remainingTime[processes.size()]; // Array to track remaining burst time for each process
+
+    // Initialize remainingTime array with burst times of each process
+    for (int i = 0; i < processes.size(); ++i) {
+        remainingTime[i] = processes[i].burstTime;
+    }
+
+    int index = 0; // Index to iterate through processes
+
+    while (true) {
+        bool done = true; // Flag to check if all processes are executed
+
+        // Traverse through each process
+        for (int i = 0; i < processes.size(); ++i) {
+            // If the process has remaining burst time
+            if (remainingTime[i] > 0) {
+                done = false; // There are still processes left to execute
+
+                // Execute the process for the quantum or its remaining time, whichever is smaller
+                int executeTime = min(quantum, remainingTime[i]);
+                currentTime += executeTime;
+                remainingTime[i] -= executeTime;
+
+                // Check if the process is completed
+                if (remainingTime[i] == 0) {
+                    processes[i].completionTime = currentTime; // Set completion time
+                }
+
+                // Add the index of the process to the ready queue
+                readyQueue.push(i);
+            }
+        }
+
+        // If all processes are executed, exit the loop
+        if (done) {
+            break;
+        }
+
+        // Move to the next process in the ready queue
+        index = (index + 1) % processes.size();
+
+        // Skip idle time
+        if (remainingTime[index] == 0) {
+            continue;
+        }
+
+        // Execute the process at the front of the ready queue
+        while (!readyQueue.empty() && remainingTime[index] == 0) {
+            index = (index + 1) % processes.size();
+        }
+    }
 }
+<details>
+<summary>Explanation</summary>
+
+- The `roundRobin` function iterates through each process in a round-robin manner, executing them for a fixed time quantum.
+- It maintains a queue to keep track of processes ready for execution and updates the completion time for each process.
+- This implementation is crucial for evaluating the performance of the Round Robin scheduling algorithm within the CPU scheduling simulation project.
+
+</details>
+
+
 
 
    ```
