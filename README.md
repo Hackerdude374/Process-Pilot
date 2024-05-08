@@ -1,7 +1,7 @@
 # CPU Scheduling Algorithms Comparison Simulator
 
 ## Overview
-This repository contains a CPU scheduling simulation project implemented in C++. The project aims to compare the performance of two CPU scheduling algorithms: Shortest Job First (SJF) and Shortest Remaining Time Next (SRTN). The simulator executes a set of processes with CPU requirements and collects various statistics to evaluate the efficiency of each algorithm.
+This project contains a CPU scheduling simulation project implemented in C++. The project aims to compare the performance of two CPU scheduling algorithms: Shortest Job First (SJF) and Shortest Remaining Time Next (SRTN). The simulator executes a set of processes with CPU requirements and collects various statistics to evaluate the efficiency of each algorithm.
 
 ## Features
 
@@ -27,6 +27,11 @@ This repository contains a CPU scheduling simulation project implemented in C++.
 
    ```bash
    g++ -o main main.cpp
+   ```
+   then run
+   ```bash
+   ./main
+   ```
 
-
+4. Pick yo
 
