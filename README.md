@@ -10,7 +10,20 @@ This project contains a CPU scheduling simulation project implemented in C++. Th
 - **Performance Metrics**: Calculates and displays average turnaround time, waiting time, response time, and CPU efficiency.
 - **Input**: Processes are read from an input file (`input.txt`) with each line containing process ID, arrival time, and burst time.
 - **Output**: Provides detailed results for each process and overall performance metrics.
-- 
+  
+## Code Snippets
+Round Robin Scheduling Algorithm Implementation
+The Round Robin (RR) scheduling algorithm is implemented in the roundRobin function. This function is responsible for simulating the Round Robin scheduling policy, where each process is assigned a fixed time quantum for execution.
+
+Here's how the roundRobin function was implemented:
+   ```cpp
+   void roundRobin(vector<Process>& processes, int quantum) {
+    // Implementation code here...
+}
+
+
+   ```
+
 ## Getting Started
 
 1. **Clone the Repository**: Clone this repository to your local machine.
@@ -35,4 +48,6 @@ This project contains a CPU scheduling simulation project implemented in C++. Th
 
 4. Pick your Scheduling Algorithm and Number of Processes.
 ![alt text](image.png)
+
+5. Enjoy!
 
