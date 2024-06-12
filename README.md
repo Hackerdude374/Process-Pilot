@@ -1,7 +1,7 @@
 # CPU Scheduling Algorithms Comparison Simulator
 ![alt text](image-2.png)
 ## Overview
-This project contains a CPU scheduling simulation project implemented in C++. The project aims to compare the performance of two CPU scheduling algorithms: Shortest Job First (SJF) and Shortest Remaining Time Next (SRTN). The simulator executes a set of processes with CPU requirements and collects various statistics to evaluate the efficiency of each algorithm.
+This project contains a CPU scheduling simulation project implemented in C++. The project aims to compare the performance of two CPU scheduling algorithms: First Come First Serve (FCFS) and Round Robin (RR). The simulator executes a set of processes with CPU requirements and collects various statistics to evaluate the efficiency of each algorithm.
 
 ## Features
 
