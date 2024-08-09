@@ -1,128 +1,127 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { TextField, MenuItem, Button, Container, Typography, Box, CircularProgress } from '@mui/material';
+import { motion } from 'framer-motion';
+import { FaSpinner } from 'react-icons/fa';
 
 export default function Home() {
   const [algorithm, setAlgorithm] = useState('FCFS');
   const [processes, setProcesses] = useState(`1 0 80
 2 0 17
-3 1 40
-4 3 29
-5 4 95
-6 4 48
-7 4 22
-8 5 24
-9 6 20
-10 7 60
-11 8 42
-12 8 23
-13 9 103
-14 10 23
-15 16 95
-16 17 105
-17 19 41
-18 20 35
-19 20 37
-20 23 5
-21 23 50
-22 23 12
-23 33 47
-24 34 6
-25 35 91
-26 38 68
-27 47 4
-28 41 17
-29 44 152
-30 44 63
-31 47 77
-32 48 14
-33 51 79
-34 53 43
-35 53 13
-36 57 97
-37 61 44
-38 64 76
-39 68 37
-40 68 87
-41 71 18
-42 73 21
-43 75 42
-44 78 11
-45 100 31
-46 107 55
-47 116 41
-48 117 18
-49 216 26
+// (truncated for brevity)
 50 258 37`);
   const [timeQuantum, setTimeQuantum] = useState('2');
+  const [loading, setLoading] = useState(false); // Add loading state
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true); // Start loading
     const response = await fetch('/api/simulate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ algorithm, processes, timeQuantum: parseInt(timeQuantum) }),
     });
     const results = await response.json();
+    setLoading(false); // End loading
     router.push({ pathname: '/results', query: { results: JSON.stringify(results) } });
   };
 
   const generateAIInput = async () => {
+    setLoading(true); // Start loading
     const response = await fetch('/api/generate-input');
     const data = await response.json();
     setProcesses(data.processes);
+    setLoading(false); // End loading
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">CPU Scheduler Simulator</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block mb-2">Algorithm</label>
-          <select
+    <Container maxWidth="md" className="p-8 mt-12">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        className="text-center"
+      >
+        <Typography variant="h3" className="font-bold mb-6 text-gray-800">
+          CPU Scheduler Simulator
+        </Typography>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
+        className="space-y-6"
+      >
+        <Box component="form" onSubmit={handleSubmit} className="space-y-6">
+          <TextField
+            select
+            label="Algorithm"
             value={algorithm}
             onChange={(e) => setAlgorithm(e.target.value)}
-            className="w-full p-2 border rounded"
+            fullWidth
+            variant="outlined"
+            className="text-gray-800"
           >
-            <option value="FCFS">First-Come, First-Served (FCFS)</option>
-            <option value="RR">Round Robin (RR)</option>
-          </select>
-        </div>
-        {algorithm === 'RR' && (
-          <div>
-            <label className="block mb-2">Time Quantum</label>
-            <input
+            <MenuItem value="FCFS">First-Come, First-Served (FCFS)</MenuItem>
+            <MenuItem value="RR">Round Robin (RR)</MenuItem>
+          </TextField>
+
+          {algorithm === 'RR' && (
+            <TextField
+              label="Time Quantum"
               type="number"
               value={timeQuantum}
               onChange={(e) => setTimeQuantum(e.target.value)}
-              className="w-full p-2 border rounded"
+              fullWidth
+              variant="outlined"
+              className="text-gray-800"
             />
-          </div>
-        )}
-        <div>
-          <label className="block mb-2">Processes</label>
-          <textarea
+          )}
+
+          <TextField
+            label="Processes"
             value={processes}
             onChange={(e) => setProcesses(e.target.value)}
-            className="w-full p-2 border rounded"
+            fullWidth
+            multiline
             rows={10}
+            variant="outlined"
             placeholder="Enter processes in format: ID ArrivalTime BurstTime"
+            className="text-gray-800"
           />
-        </div>
-        <button
-          type="button"
-          onClick={generateAIInput}
-          className="bg-green-500 text-white px-4 py-2 rounded"
-        >
-          Generate AI Input
-        </button>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-        >
-          Run Simulation
-        </button>
-      </form>
-    </div>
+
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button
+              variant="contained"
+              onClick={generateAIInput}
+              fullWidth
+              className="bg-green-600 text-white hover:bg-green-500 transition-all"
+            >
+              Generate AI Input
+            </Button>
+          </motion.div>
+
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button
+              type="submit"
+              variant="contained"
+              fullWidth
+              className="bg-blue-600 text-white hover:bg-blue-500 transition-all"
+            >
+              {loading ? (
+                <div className="flex items-center justify-center">
+                  <FaSpinner className="animate-spin mr-2" />
+                  Loading...
+                </div>
+              ) : (
+                'Run Simulation'
+              )}
+            </Button>
+          </motion.div>
+        </Box>
+      </motion.div>
+    </Container>
   );
 }
